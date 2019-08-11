@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ErrorMessage from "./components/errors/ErrorMessage";
 import MapContainer from "./components/map/MapContainer";
 import VenueList from "./components/venues/VenueList";
+import RadiusSlider from "./components/venues/RadiusSlider";
 
 const Container = styled.div`
   text-align: center;
@@ -12,7 +13,7 @@ const FlexContainer = styled.div`
   display: flex;
   height: 600px;
   width: 100vw;
-  @media (max-width: 768px) {
+  @media (max-width: 860px) {
     flex-direction: column;
   }
 `;
@@ -24,15 +25,25 @@ function App(props) {
   const [venues, setVenues] = useState(null);
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [position, setPosition] = useState(null);
+  const [radius, setRadius] = useState(15);
 
   // componentDidMount ////////////////////////////////////////////////////
   useEffect(() => {
     // get location of user
     // fetch venues from FourSquare
+
     const fetchData = async () => {
       navigator.geolocation.getCurrentPosition(position => {
         fetch(
-          `https://cors-anywhere.herokuapp.com/https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=20190810`,
+          `${
+            process.env.REACT_APP_CORS_URL
+          }https://api.foursquare.com/v2/venues/search?ll=${
+            position.coords.latitude
+          },${position.coords.longitude}&client_id=${
+            process.env.REACT_APP_CLIENT_ID
+          }&client_secret=${
+            process.env.REACT_APP_CLIENT_SECRET
+          }&v=20190810&intent=browse&radius=${radius * 100}`,
           {
             method: "GET",
             headers: {
@@ -61,7 +72,6 @@ function App(props) {
   if (loading) {
     return renderLoading();
   } else if (position && venues) {
-    console.log(venues);
     return renderComponent();
   } else {
     return renderError();
@@ -73,12 +83,14 @@ function App(props) {
     return (
       <Container>
         <h1>Venue Finder</h1>
+        <RadiusSlider radius={radius} setRadius={setRadius} />
         <FlexContainer>
           <MapContainer
             venues={venues}
             position={position}
             setSelectedVenue={setSelectedVenue}
             selectedVenue={selectedVenue}
+            radius={radius}
           />
           <VenueList
             venues={venues}

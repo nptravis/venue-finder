@@ -13,7 +13,13 @@ const Container = styled.div`
 	flex: 1;
 	height: 100%;
 `;
-function MapContainer({ position, venues, selectedVenue, setSelectedVenue }) {
+function MapContainer({
+	position,
+	venues,
+	selectedVenue,
+	setSelectedVenue,
+	radius
+}) {
 	// Variables and State ////////////////////////////////////////////////////
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -42,6 +48,7 @@ function MapContainer({ position, venues, selectedVenue, setSelectedVenue }) {
 	// Render Functions ////////////////////////////////////////////////////
 
 	function renderComponent() {
+		console.log("MAP CONTSIANRE", radius);
 		return (
 			<Container>
 				{/*<form onSubmit={e => setLocation(userInput)}>
@@ -57,7 +64,7 @@ function MapContainer({ position, venues, selectedVenue, setSelectedVenue }) {
 							height: "100%",
 							width: "100%"
 						}}
-						zoom={15}
+						zoom={radius}
 						center={{
 							lat: position.latitude,
 							lng: position.longitude
@@ -79,7 +86,7 @@ function MapContainer({ position, venues, selectedVenue, setSelectedVenue }) {
 								draggable: true,
 								editable: false,
 								visible: true,
-								radius: 1000,
+								radius: radius,
 								zIndex: 1
 							}}
 						></Circle>

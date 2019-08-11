@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import VenueDropdown from "./VenueDropdown";
+import ErrorMessage from "../errors/ErrorMessage";
 const Container = styled.div`
 	border: 1px solid black;
+	text-align: left;
 	overflow: auto;
 	flex: 1;
 	height: 100%;
@@ -49,8 +51,10 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 								key={venue.id}
 								className={selectedVenue === venue.id ? "selected" : ""}
 								onClick={() => setSelectedVenue(venue.id)}
+								id={venue.id}
 							>
 								<div>{venue.name}</div>
+								{selectedVenue === venue.id && <VenueDropdown venue={venue} />}
 							</li>
 						);
 					})}
@@ -62,8 +66,7 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 	function renderError() {
 		return (
 			<Container>
-				<h1>Error</h1>
-				<p>{error}</p>
+				<ErrorMessage error={error} />
 			</Container>
 		);
 	}
