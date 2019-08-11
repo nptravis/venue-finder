@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import {
+	GoogleMap,
+	LoadScript,
+	Marker,
+	Circle,
+	InfoWindow
+} from "@react-google-maps/api";
+import Popup from "reactjs-popup";
 
 const Container = styled.div``;
 
@@ -10,6 +17,7 @@ function MapContainer({ position, venues }) {
 	const [error, setError] = useState(null);
 	const [location, setLocation] = useState("Brooklyn,NY");
 	const [userInput, setUserInput] = useState(null);
+	const [infoWindow, setInfoWindow] = useState(null);
 
 	// componentDidMount ////////////////////////////////////////////////////
 	useEffect(() => {
@@ -55,6 +63,26 @@ function MapContainer({ position, venues }) {
 							lng: position.longitude
 						}}
 					>
+						<Circle
+							center={{
+								lat: position.latitude,
+								lng: position.longitude
+							}}
+							// required
+							options={{
+								strokeColor: "#FF0000",
+								strokeOpacity: 0.8,
+								strokeWeight: 2,
+								fillColor: "#FF0000",
+								fillOpacity: 0.35,
+								clickable: false,
+								draggable: true,
+								editable: false,
+								visible: true,
+								radius: 1000,
+								zIndex: 1
+							}}
+						></Circle>
 						{venues.map(venue => {
 							return (
 								<Marker
@@ -63,8 +91,21 @@ function MapContainer({ position, venues }) {
 										lat: venue.location.lat,
 										lng: venue.location.lng
 									}}
-									onClick={() => console.log("clicked")}
-								/>
+									onClick={() => setInfoWindow(venue.id)}
+								>
+									{infoWindow === venue.id && (
+										<InfoWindow
+											position={{
+												lat: venue.location.lat + 0.001,
+												lng: venue.location.lng
+											}}
+										>
+											<div>
+												<h4>{venue.name}</h4>
+											</div>
+										</InfoWindow>
+									)}
+								</Marker>
 							);
 						})}
 					</GoogleMap>
