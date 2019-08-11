@@ -9,15 +9,16 @@ import {
 } from "@react-google-maps/api";
 import Popup from "reactjs-popup";
 
-const Container = styled.div``;
-
-function MapContainer({ position, venues }) {
+const Container = styled.div`
+	flex: 1;
+	height: 100%;
+`;
+function MapContainer({ position, venues, selectedVenue, setSelectedVenue }) {
 	// Variables and State ////////////////////////////////////////////////////
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [location, setLocation] = useState("Brooklyn,NY");
 	const [userInput, setUserInput] = useState(null);
-	const [infoWindow, setInfoWindow] = useState(null);
 
 	// componentDidMount ////////////////////////////////////////////////////
 	useEffect(() => {
@@ -43,10 +44,9 @@ function MapContainer({ position, venues }) {
 	function renderComponent() {
 		return (
 			<Container>
-				<h1>MapContainer Component</h1>
-				<form onSubmit={e => setLocation(userInput)}>
+				{/*<form onSubmit={e => setLocation(userInput)}>
 					<input type="text" onChange={e => setUserInput(e.target.value)} />
-				</form>
+				</form>*/}
 				<LoadScript
 					id="script-loader"
 					googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
@@ -54,8 +54,8 @@ function MapContainer({ position, venues }) {
 					<GoogleMap
 						id="example-map"
 						mapContainerStyle={{
-							height: "400px",
-							width: "800px"
+							height: "100%",
+							width: "100%"
 						}}
 						zoom={15}
 						center={{
@@ -91,9 +91,11 @@ function MapContainer({ position, venues }) {
 										lat: venue.location.lat,
 										lng: venue.location.lng
 									}}
-									onClick={() => setInfoWindow(venue.id)}
+									onClick={() => {
+										setSelectedVenue(venue.id);
+									}}
 								>
-									{infoWindow === venue.id && (
+									{selectedVenue === venue.id && (
 										<InfoWindow
 											position={{
 												lat: venue.location.lat + 0.001,

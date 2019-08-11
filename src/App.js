@@ -2,9 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ErrorMessage from "./components/errors/ErrorMessage";
 import MapContainer from "./components/map/MapContainer";
+import VenueList from "./components/venues/VenueList";
 
 const Container = styled.div`
-  border: 1px solid black;
+  text-align: center;
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  height: 600px;
+  width: 100vw;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 function App(props) {
@@ -12,9 +22,8 @@ function App(props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ message: "Hmm...", error: "undefined" });
   const [venues, setVenues] = useState(null);
-  let coords;
-
-  const [position, setPosition] = useState(coords);
+  const [selectedVenue, setSelectedVenue] = useState(null);
+  const [position, setPosition] = useState(null);
 
   // componentDidMount ////////////////////////////////////////////////////
   useEffect(() => {
@@ -22,8 +31,6 @@ function App(props) {
     // fetch venues from FourSquare
     const fetchData = async () => {
       navigator.geolocation.getCurrentPosition(position => {
-        setPosition(position.coords);
-
         fetch(
           `https://cors-anywhere.herokuapp.com/https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=20190810`,
           {
@@ -36,6 +43,7 @@ function App(props) {
         )
           .then(response => response.json())
           .then(data => {
+            setPosition(position.coords);
             setVenues(data.response.venues);
             setLoading(false);
           })
@@ -64,14 +72,20 @@ function App(props) {
   function renderComponent() {
     return (
       <Container>
-        <h1>App Component</h1>
-
-        <MapContainer venues={venues} position={position} />
-        <ul>
-          {venues.map(venue => {
-            return <li key={venue.id}>{venue.name}</li>;
-          })}
-        </ul>
+        <h1>Venue Finder</h1>
+        <FlexContainer>
+          <MapContainer
+            venues={venues}
+            position={position}
+            setSelectedVenue={setSelectedVenue}
+            selectedVenue={selectedVenue}
+          />
+          <VenueList
+            venues={venues}
+            selectedVenue={selectedVenue}
+            setSelectedVenue={setSelectedVenue}
+          />
+        </FlexContainer>
       </Container>
     );
   }
