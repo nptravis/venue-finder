@@ -19,23 +19,32 @@ const Container = styled.div`
 
   header {
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     top: 0;
     left: 0;
     width: 100%;
     background-color: ${colors.blue};
     color: white;
     height: 50px;
-    text-align: left;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      margin-right: 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     h1 {
       padding: 0;
       margin: 0 0 0 20px;
       line-height: 50px;
       font-size: 2em;
-    }
-
-    @media (max-width: 860px) {
-      text-align: center;
     }
   }
 
@@ -130,6 +139,21 @@ function App(props) {
           <Typography variant="h1" component="h1" gutterBottom>
             iNeed
           </Typography>
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            data-prefix="fas"
+            data-icon="hamburger"
+            className="svg-inline--fa fa-hamburger fa-w-16"
+            role="img"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              fill="currentColor"
+              d="M464 256H48a48 48 0 0 0 0 96h416a48 48 0 0 0 0-96zm16 128H32a16 16 0 0 0-16 16v16a64 64 0 0 0 64 64h352a64 64 0 0 0 64-64v-16a16 16 0 0 0-16-16zM58.64 224h394.72c34.57 0 54.62-43.9 34.82-75.88C448 83.2 359.55 32.1 256 32c-103.54.1-192 51.2-232.18 116.11C4 180.09 24.07 224 58.64 224zM384 112a16 16 0 1 1-16 16 16 16 0 0 1 16-16zM256 80a16 16 0 1 1-16 16 16 16 0 0 1 16-16zm-128 32a16 16 0 1 1-16 16 16 16 0 0 1 16-16z"
+            ></path>
+          </svg>
         </header>
         <main>
           <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />

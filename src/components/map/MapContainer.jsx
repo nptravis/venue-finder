@@ -85,7 +85,7 @@ function MapContainer({
 								zIndex: 1
 							}}
 						></Circle>
-						{venues.map(venue => {
+						{venues.map((venue, index) => {
 							return (
 								<Marker
 									key={venue.id}
@@ -95,6 +95,7 @@ function MapContainer({
 									}}
 									onClick={() => {
 										setSelectedVenue(venue.id);
+										handleScroll(index);
 									}}
 								>
 									{selectedVenue === venue.id && (
@@ -132,6 +133,13 @@ function MapContainer({
 				<h1>Loading...</h1>
 			</div>
 		);
+	}
+
+	// event handlers //////////////////////////////////////////////////////////////////////////
+	function handleScroll(index) {
+		document
+			.getElementById("list-item-" + index)
+			.scrollIntoView({ behavior: "smooth" });
 	}
 }
 
