@@ -47,19 +47,16 @@ const Container = styled.div`
 `;
 
 function Spinner(props) {
-	function renderComponent() {
-		return (
-			<Container>
-				<div className="lds-ring">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-			</Container>
-		);
-	}
-	return renderComponent();
+	return (
+		<Container>
+			<div className="lds-ring">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+		</Container>
+	);
 }
 
 export default Spinner;

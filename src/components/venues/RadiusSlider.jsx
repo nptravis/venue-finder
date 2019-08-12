@@ -45,21 +45,24 @@ const CustomSlider = withStyles({
 })(Slider);
 
 function RadiusSlider({ radius, setRadius, setRefreshVenues }) {
-	return (
-		<Container>
-			<Typography variant="body1" nowrap="true" style={{ color: colors.blue }}>
-				How bad?
-			</Typography>
-			<CustomSlider
-				defaultValue={radius}
-				valueLabelDisplay="auto"
-				min={250}
-				max={10000}
-				onChangeCommitted={e => setRefreshVenues(true)}
-				getAriaValueText={e => setRadius(e)}
-			/>
-		</Container>
-	);
+	function renderComponent() {
+		return (
+			<Container>
+				<Typography variant="body1" nowrap="true">
+					How bad?
+				</Typography>
+				<CustomSlider
+					defaultValue={radius}
+					valueLabelDisplay="auto"
+					min={250}
+					max={10000}
+					onChangeCommitted={e => setRefreshVenues(true)}
+					getAriaValueText={e => setRadius(e)}
+				/>
+			</Container>
+		);
+	}
+	return renderComponent();
 }
 
 export default RadiusSlider;

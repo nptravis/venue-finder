@@ -3,6 +3,8 @@ import styled from "styled-components";
 import VenueDropdown from "./VenueDropdown";
 import ErrorMessage from "../errors/ErrorMessage";
 import { colors } from "../../colors";
+import FloatingArrows from "./FloatingArrows";
+import Spinner from "../loaders/Spinner";
 
 const Container = styled.div`
 	text-align: left;
@@ -17,15 +19,18 @@ const Container = styled.div`
 			margin: 0;
 			padding: 5px;
 			list-style: none;
-			border: 2px solid ${colors.grey};
+
 			background-color: ${colors.lightGrey};
+
 			&.selected {
 				cursor: default;
 				background-color: ${colors.blue};
+				color: white;
 			}
 			&:hover {
 				cursor: pointer;
 				background-color: ${colors.blue};
+				color: white;
 			}
 		}
 	}
@@ -85,7 +90,7 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 	function renderLoading() {
 		return (
 			<Container>
-				<h1>Loading...</h1>
+				<Spinner />
 			</Container>
 		);
 	}

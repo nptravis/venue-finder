@@ -7,7 +7,8 @@ import Ellipsis from "../loaders/Ellipsis";
 
 const Container = styled.div`
 	border-top: 1px solid ${colors.grey};
-	background-color: ${colors.lightGrey};
+	background-color: white;
+	color: black;
 `;
 
 const Icon = styled.img`
@@ -87,7 +88,6 @@ function VenueDropdown({ venue }) {
 	if (loading) {
 		return renderLoading();
 	} else if (venueDetails) {
-		console.log(venueDetails);
 		return renderComponent();
 	} else {
 		return renderError();

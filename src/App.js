@@ -8,6 +8,7 @@ import Search from "./components/filters/Search";
 import Spinner from "./components/loaders/Spinner";
 import { colors } from "./colors";
 import Typography from "@material-ui/core/Typography";
+import FloatingArrows from "./components/venues/FloatingArrows";
 
 const Container = styled.div`
   text-align: center;
@@ -16,10 +17,40 @@ const Container = styled.div`
   width: 100vw;
   margin-bottom: 50px;
 
-  h1 {
-    font-size: 3em;
-    padding: 20px 0;
-    margin: 0;
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: ${colors.blue};
+    color: white;
+    height: 50px;
+    text-align: left;
+
+    h1 {
+      padding: 0;
+      margin: 0 0 0 20px;
+      line-height: 50px;
+      font-size: 2em;
+    }
+
+    @media (max-width: 860px) {
+      text-align: center;
+    }
+  }
+
+  main {
+    padding-top: 100px;
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background-color: ${colors.blue};
+    color: white;
   }
 `;
 
@@ -51,7 +82,7 @@ function App(props) {
     // get location of user
     // fetch venues from FourSquare
 
-    const fetchData = async () => {
+    const fetchData = () => {
       navigator.geolocation.getCurrentPosition(position => {
         fetch(
           `${process.env.REACT_APP_CORS_URL}https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=20190810&intent=browse&radius=${radius}&query=${searchTerm}`,
@@ -94,29 +125,35 @@ function App(props) {
   function renderComponent() {
     return (
       <Container>
-        <Typography variant="h1" component="h1" gutterBottom>
-          iNeed
-        </Typography>
-        <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
-        <RadiusSlider
-          radius={radius}
-          setRadius={setRadius}
-          setRefreshVenues={setRefreshVenues}
-        />
-        <FlexContainer>
-          <MapContainer
-            venues={venues}
-            position={position}
-            setSelectedVenue={setSelectedVenue}
-            selectedVenue={selectedVenue}
+        <header>
+          <Typography variant="h1" component="h1" gutterBottom>
+            iNeed
+          </Typography>
+        </header>
+        <main>
+          <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+          <RadiusSlider
             radius={radius}
+            setRadius={setRadius}
+            setRefreshVenues={setRefreshVenues}
           />
-          <VenueList
-            venues={venues}
-            selectedVenue={selectedVenue}
-            setSelectedVenue={setSelectedVenue}
-          />
-        </FlexContainer>
+          <FloatingArrows />
+          <FlexContainer>
+            <MapContainer
+              venues={venues}
+              position={position}
+              setSelectedVenue={setSelectedVenue}
+              selectedVenue={selectedVenue}
+              radius={radius}
+            />
+            <VenueList
+              venues={venues}
+              selectedVenue={selectedVenue}
+              setSelectedVenue={setSelectedVenue}
+            />
+          </FlexContainer>
+        </main>
+        <footer>Nic Travis &copy; 2019</footer>
       </Container>
     );
   }

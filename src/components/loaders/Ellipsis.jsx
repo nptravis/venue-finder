@@ -68,19 +68,16 @@ const Container = styled.div`
 `;
 
 function Ellipsis(props) {
-  function renderComponent() {
-    return (
-      <Container>
-        <div className="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </Container>
-    );
-  }
-  return renderComponent();
+  return (
+    <Container>
+      <div className="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </Container>
+  );
 }
 
 export default Ellipsis;
