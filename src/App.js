@@ -13,8 +13,8 @@ import FloatingArrows from "./components/venues/FloatingArrows";
 const Container = styled.div`
   text-align: center;
   background-color: ${colors.lightGrey};
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   margin-bottom: 50px;
 
   header {
@@ -41,6 +41,7 @@ const Container = styled.div`
 
   main {
     padding-top: 100px;
+    height: calc(100% - 70px);
   }
 
   footer {
@@ -57,7 +58,7 @@ const Container = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   height: 500px;
-  width: 100vw;
+  width: 100%;
   @media (max-width: 860px) {
     flex-direction: column;
   }

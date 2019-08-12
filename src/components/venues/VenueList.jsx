@@ -13,7 +13,7 @@ const Container = styled.div`
 	height: 100%;
 
 	ul {
-		margin: 0;
+		margin: 2px;
 		padding: 0;
 		li {
 			margin: 0;
@@ -32,6 +32,9 @@ const Container = styled.div`
 				background-color: ${colors.blue};
 				color: white;
 			}
+			// &:after {
+			// 	content: " 🦄";
+			// }
 		}
 	}
 `;
