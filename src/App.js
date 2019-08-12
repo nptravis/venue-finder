@@ -137,7 +137,7 @@ function App(props) {
             setRadius={setRadius}
             setRefreshVenues={setRefreshVenues}
           />
-          <FloatingArrows />
+          <FloatingArrows venues={venues} />
           <FlexContainer>
             <MapContainer
               venues={venues}

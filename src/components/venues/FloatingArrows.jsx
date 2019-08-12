@@ -54,7 +54,7 @@ const Arrow = styled.svg`
 	}
 `;
 
-function FloatingArrows(props) {
+function FloatingArrows({ venues }) {
 	function renderComponent() {
 		return (
 			<Container>
@@ -67,6 +67,8 @@ function FloatingArrows(props) {
 					role="img"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 448 512"
+					data-position="top"
+					onClick={e => handleScroll(e)}
 				>
 					<path
 						fill="currentColor"
@@ -82,6 +84,8 @@ function FloatingArrows(props) {
 					role="img"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 448 512"
+					data-position="bottom"
+					onClick={e => handleScroll(e)}
 				>
 					<path
 						fill="currentColor"
@@ -92,6 +96,17 @@ function FloatingArrows(props) {
 		);
 	}
 	return renderComponent();
+
+	// event handlers /////////////////////////////////////////////////////////////
+	function handleScroll(e) {
+		let top = document.getElementById("list-item-0");
+		let bottom = document.getElementById("list-item-" + (venues.length - 1));
+		if (e.target.dataset.position === "top") {
+			top.scrollIntoView({ behavior: "smooth" });
+		} else {
+			bottom.scrollIntoView({ behavior: "smooth" });
+		}
+	}
 }
 
 export default FloatingArrows;

@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 const Container = styled.div`
 	color: black;
 	background-color: white;
+	padding: 5px;
 `;
 
 function ErrorMessage({ error }) {

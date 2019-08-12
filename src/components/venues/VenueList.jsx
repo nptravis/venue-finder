@@ -61,13 +61,13 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 		return (
 			<Container>
 				<ul>
-					{venues.map(venue => {
+					{venues.map((venue, index) => {
 						return (
 							<li
+								id={"list-item-" + index}
 								key={venue.id}
 								className={selectedVenue === venue.id ? "selected" : ""}
 								onClick={() => setSelectedVenue(venue.id)}
-								id={venue.id}
 							>
 								<div>{venue.name}</div>
 								{selectedVenue === venue.id && <VenueDropdown venue={venue} />}
