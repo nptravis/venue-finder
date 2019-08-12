@@ -6,10 +6,19 @@ import VenueList from "./components/venues/VenueList";
 import RadiusSlider from "./components/venues/RadiusSlider";
 import Search from "./components/venues/Search";
 import Spinner from "./components/loaders/Spinner";
+import { colors } from "./colors";
 
 const Container = styled.div`
   text-align: center;
-  background-color: "#F7F7F7";
+  background-color: ${colors.lightGrey};
+  height: 100vh;
+  width: 100vw;
+
+  h1 {
+    font-size: 3em;
+    padding: 20px 0;
+    margin: 0;
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -24,7 +33,10 @@ const FlexContainer = styled.div`
 function App(props) {
   // Variables and State ////////////////////////////////////////////////////
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState({ message: "Hmm...", error: "undefined" });
+  const [error, setError] = useState({
+    message: "Problem in App.js file.",
+    error: "undefined"
+  });
   const [venues, setVenues] = useState(null);
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [position, setPosition] = useState(null);
@@ -80,7 +92,7 @@ function App(props) {
   function renderComponent() {
     return (
       <Container>
-        <h1>Venue Finder</h1>
+        <h1>iNeed</h1>
         <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
         <RadiusSlider
           radius={radius}

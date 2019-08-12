@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { colors } from "../../colors";
 
 const spin = keyframes`
 	0% {
@@ -12,7 +13,10 @@ const spin = keyframes`
 `;
 
 const Container = styled.div`
-	border: 1px solid black .lds-ring {
+	height: 100vh;
+	width: 100vw;
+
+	.lds-ring {
 		display: inline-block;
 		position: relative;
 		width: 64px;
@@ -29,6 +33,7 @@ const Container = styled.div`
 		border-radius: 50%;
 		animation: ${spin} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 		border-color: #fff transparent transparent transparent;
+		background-color: ${colors.blue};
 	}
 	.lds-ring div:nth-child(1) {
 		animation-delay: -0.45s;
@@ -45,7 +50,7 @@ function Spinner(props) {
 	function renderComponent() {
 		return (
 			<Container>
-				<div class="lds-ring">
+				<div className="lds-ring">
 					<div></div>
 					<div></div>
 					<div></div>

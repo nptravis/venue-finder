@@ -3,7 +3,18 @@ import styled from "styled-components";
 import Slider from "@material-ui/core/Slider";
 import { withStyles } from "@material-ui/core/styles";
 
-const Container = styled.div``;
+const Container = styled.div`
+	width: 90%;
+	margin: 10px auto;
+	display: flex;
+	height: 30px;
+	align-items: center;
+
+	h4 {
+		padding: 0 20px 0 0;
+		margin: 0;
+	}
+`;
 
 const CustomSlider = withStyles({
 	rail: {
@@ -25,6 +36,7 @@ function RadiusSlider({ radius, setRadius, setRefreshVenues }) {
 	function renderComponent() {
 		return (
 			<Container>
+				<h4>Distance (m)</h4>
 				<CustomSlider
 					defaultValue={radius}
 					valueLabelDisplay="auto"

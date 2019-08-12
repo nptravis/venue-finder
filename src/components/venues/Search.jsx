@@ -2,9 +2,19 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ErrorMessage from "../errors/ErrorMessage";
 import Spinner from "../loaders/Spinner";
+import Input from "@material-ui/core/Input";
+import Button from "@material-ui/core/Button";
 
 const Container = styled.div`
-	border: 1px solid black;
+	text-align: center;
+
+	input[type="text"] {
+		width: 200px;
+	}
+
+	button {
+		margin-left: 20px;
+	}
 `;
 
 function Search({ searchTerm, setSearchTerm }) {
@@ -41,12 +51,15 @@ function Search({ searchTerm, setSearchTerm }) {
 						setSearchTerm(input);
 					}}
 				>
-					<input
+					<Input
 						type="text"
 						onChange={e => setInput(e.target.value)}
 						defaultValue={searchTerm}
+						placeholder="What do you need?"
 					/>
-					<input type="submit" value="Search" placeholder="i.e. tacos" />
+					<Button variant="contained" type="submit">
+						I Need This
+					</Button>
 				</form>
 			</Container>
 		);

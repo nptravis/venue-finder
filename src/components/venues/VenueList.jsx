@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import VenueDropdown from "./VenueDropdown";
 import ErrorMessage from "../errors/ErrorMessage";
+import { colors } from "../../colors";
 
 const Container = styled.div`
 	border: 1px solid black;
@@ -11,10 +12,21 @@ const Container = styled.div`
 	height: 100%;
 
 	ul {
+		margin: 0;
+		padding: 0;
 		li {
+			margin: 0;
+			padding: 5px;
+			list-style: none;
+			border: 4px solid ${colors.blue};
+			background-color: ${colors.grey};
 			&.selected {
 				border: 1px solid red;
 				color: red;
+			}
+			&:hover {
+				cursor: pointer;
+				background-color: ${colors.lightGrey};
 			}
 		}
 	}
@@ -44,7 +56,6 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 	function renderComponent() {
 		return (
 			<Container>
-				<h1>VenueList Component</h1>
 				<ul>
 					{venues.map(venue => {
 						return (
