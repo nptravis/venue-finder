@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
+import Typography from "@material-ui/core/Typography";
 
-const Container = styled.div`
-	border: 1px solid black;
-`;
+const Container = styled.div``;
 
 function ErrorMessage({ error }) {
 	function renderComponent() {
 		return (
 			<Container>
-				<h1>Error</h1>
-				<p>{error.message}</p>
-				<p>{error.error}</p>
+				<Typography variant="h4">Error</Typography>
+				<Typography variant="body1">{error.message}</Typography>
+				<Typography variant="body1">{error.error}</Typography>
 			</Container>
 		);
 	}

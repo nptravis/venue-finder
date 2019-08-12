@@ -59,7 +59,7 @@ function MapContainer({
 							height: "100%",
 							width: "100%"
 						}}
-						zoom={14}
+						zoom={15}
 						center={{
 							lat: position.latitude,
 							lng: position.longitude

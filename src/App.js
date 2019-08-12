@@ -3,16 +3,18 @@ import styled from "styled-components";
 import ErrorMessage from "./components/errors/ErrorMessage";
 import MapContainer from "./components/map/MapContainer";
 import VenueList from "./components/venues/VenueList";
-import RadiusSlider from "./components/venues/RadiusSlider";
-import Search from "./components/venues/Search";
+import RadiusSlider from "./components/filters/RadiusSlider";
+import Search from "./components/filters/Search";
 import Spinner from "./components/loaders/Spinner";
 import { colors } from "./colors";
+import Typography from "@material-ui/core/Typography";
 
 const Container = styled.div`
   text-align: center;
   background-color: ${colors.lightGrey};
   height: 100vh;
   width: 100vw;
+  margin-bottom: 50px;
 
   h1 {
     font-size: 3em;
@@ -23,7 +25,7 @@ const Container = styled.div`
 
 const FlexContainer = styled.div`
   display: flex;
-  height: 600px;
+  height: 500px;
   width: 100vw;
   @media (max-width: 860px) {
     flex-direction: column;
@@ -40,7 +42,7 @@ function App(props) {
   const [venues, setVenues] = useState(null);
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [position, setPosition] = useState(null);
-  const [radius, setRadius] = useState(15);
+  const [radius, setRadius] = useState(250);
   const [refreshVenues, setRefreshVenues] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -92,7 +94,9 @@ function App(props) {
   function renderComponent() {
     return (
       <Container>
-        <h1>iNeed</h1>
+        <Typography variant="h1" component="h1" gutterBottom>
+          iNeed
+        </Typography>
         <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
         <RadiusSlider
           radius={radius}

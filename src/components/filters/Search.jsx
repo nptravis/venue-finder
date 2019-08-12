@@ -4,6 +4,21 @@ import ErrorMessage from "../errors/ErrorMessage";
 import Spinner from "../loaders/Spinner";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import { colors } from "../../colors";
+
+const CustomInput = withStyles({
+	underline: {
+		color: colors.blue,
+
+		"&:after": {
+			borderBottom: "2px solid" + colors.blue
+		}
+	},
+	focused: {
+		color: colors.blue
+	}
+})(Input);
 
 const Container = styled.div`
 	text-align: center;
@@ -51,14 +66,14 @@ function Search({ searchTerm, setSearchTerm }) {
 						setSearchTerm(input);
 					}}
 				>
-					<Input
+					<CustomInput
 						type="text"
 						onChange={e => setInput(e.target.value)}
 						defaultValue={searchTerm}
 						placeholder="What do you need?"
 					/>
 					<Button variant="contained" type="submit">
-						I Need This
+						I Need It
 					</Button>
 				</form>
 			</Container>

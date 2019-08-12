@@ -5,7 +5,6 @@ import ErrorMessage from "../errors/ErrorMessage";
 import { colors } from "../../colors";
 
 const Container = styled.div`
-	border: 1px solid black;
 	text-align: left;
 	overflow: auto;
 	flex: 1;
@@ -18,15 +17,15 @@ const Container = styled.div`
 			margin: 0;
 			padding: 5px;
 			list-style: none;
-			border: 4px solid ${colors.blue};
-			background-color: ${colors.grey};
+			border: 2px solid ${colors.grey};
+			background-color: ${colors.lightGrey};
 			&.selected {
-				border: 1px solid red;
-				color: red;
+				cursor: default;
+				background-color: ${colors.blue};
 			}
 			&:hover {
 				cursor: pointer;
-				background-color: ${colors.lightGrey};
+				background-color: ${colors.blue};
 			}
 		}
 	}
