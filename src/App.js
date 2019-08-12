@@ -4,9 +4,12 @@ import ErrorMessage from "./components/errors/ErrorMessage";
 import MapContainer from "./components/map/MapContainer";
 import VenueList from "./components/venues/VenueList";
 import RadiusSlider from "./components/venues/RadiusSlider";
+import Search from "./components/venues/Search";
+import Spinner from "./components/loaders/Spinner";
 
 const Container = styled.div`
   text-align: center;
+  background-color: "#F7F7F7";
 `;
 
 const FlexContainer = styled.div`
@@ -26,6 +29,8 @@ function App(props) {
   const [selectedVenue, setSelectedVenue] = useState(null);
   const [position, setPosition] = useState(null);
   const [radius, setRadius] = useState(15);
+  const [refreshVenues, setRefreshVenues] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   // componentDidMount ////////////////////////////////////////////////////
   useEffect(() => {
@@ -35,15 +40,7 @@ function App(props) {
     const fetchData = async () => {
       navigator.geolocation.getCurrentPosition(position => {
         fetch(
-          `${
-            process.env.REACT_APP_CORS_URL
-          }https://api.foursquare.com/v2/venues/search?ll=${
-            position.coords.latitude
-          },${position.coords.longitude}&client_id=${
-            process.env.REACT_APP_CLIENT_ID
-          }&client_secret=${
-            process.env.REACT_APP_CLIENT_SECRET
-          }&v=20190810&intent=browse&radius=${radius * 100}`,
+          `${process.env.REACT_APP_CORS_URL}https://api.foursquare.com/v2/venues/search?ll=${position.coords.latitude},${position.coords.longitude}&client_id=${process.env.REACT_APP_CLIENT_ID}&client_secret=${process.env.REACT_APP_CLIENT_SECRET}&v=20190810&intent=browse&radius=${radius}&query=${searchTerm}`,
           {
             method: "GET",
             headers: {
@@ -56,6 +53,7 @@ function App(props) {
           .then(data => {
             setPosition(position.coords);
             setVenues(data.response.venues);
+            setRefreshVenues(false);
             setLoading(false);
           })
           .catch(err => {
@@ -66,7 +64,7 @@ function App(props) {
     };
 
     fetchData();
-  }, []);
+  }, [refreshVenues, searchTerm]);
 
   // Render Component ////////////////////////////////////////////////////
   if (loading) {
@@ -83,7 +81,12 @@ function App(props) {
     return (
       <Container>
         <h1>Venue Finder</h1>
-        <RadiusSlider radius={radius} setRadius={setRadius} />
+        <Search setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+        <RadiusSlider
+          radius={radius}
+          setRadius={setRadius}
+          setRefreshVenues={setRefreshVenues}
+        />
         <FlexContainer>
           <MapContainer
             venues={venues}
@@ -113,7 +116,7 @@ function App(props) {
   function renderLoading() {
     return (
       <Container>
-        <h1>Loading...</h1>
+        <Spinner />
       </Container>
     );
   }

@@ -24,7 +24,6 @@ function MapContainer({
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 	const [location, setLocation] = useState("Brooklyn,NY");
-	const [userInput, setUserInput] = useState(null);
 
 	// componentDidMount ////////////////////////////////////////////////////
 	useEffect(() => {
@@ -48,12 +47,8 @@ function MapContainer({
 	// Render Functions ////////////////////////////////////////////////////
 
 	function renderComponent() {
-		console.log("MAP CONTSIANRE", radius);
 		return (
 			<Container>
-				{/*<form onSubmit={e => setLocation(userInput)}>
-					<input type="text" onChange={e => setUserInput(e.target.value)} />
-				</form>*/}
 				<LoadScript
 					id="script-loader"
 					googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
@@ -64,7 +59,7 @@ function MapContainer({
 							height: "100%",
 							width: "100%"
 						}}
-						zoom={radius}
+						zoom={14}
 						center={{
 							lat: position.latitude,
 							lng: position.longitude
