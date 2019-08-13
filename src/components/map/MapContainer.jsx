@@ -7,7 +7,8 @@ import {
 	Circle,
 	InfoWindow
 } from "@react-google-maps/api";
-import Popup from "reactjs-popup";
+import ErrorMessage from "../errors/ErrorMessage";
+import Spinner from "../loaders/Spinner";
 
 const Container = styled.div`
 	flex: 1;
@@ -122,7 +123,7 @@ function MapContainer({
 	function renderError() {
 		return (
 			<div>
-				<h1>Oops...sorry about that, try a refresh?</h1>
+				<ErrorMessage error={error} />
 			</div>
 		);
 	}
@@ -130,7 +131,7 @@ function MapContainer({
 	function renderLoading() {
 		return (
 			<div>
-				<h1>Loading...</h1>
+				<Spinner />
 			</div>
 		);
 	}

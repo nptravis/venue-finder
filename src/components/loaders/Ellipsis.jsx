@@ -30,7 +30,6 @@ const crawl3 = keyframes`
 `;
 
 const Container = styled.div`
-  border: 1px solid black;
   margin: 0 auto;
   text-align: center;
   .lds-ellipsis {

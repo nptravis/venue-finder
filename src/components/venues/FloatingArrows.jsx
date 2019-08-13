@@ -2,25 +2,6 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { colors } from "../../colors";
 
-const bounce = keyframes`
-	0% {
-		marginTop: 0px;
-	} 
-	25% {
-		marginTop: -10px;
-	}
-	50% {
-		marginTop: -20px;
-	}
-	75% {
-		marginTop: -10px;
-	}
-	100 % {
-		marginTop: 0px;
-	}
-
-`;
-
 const Container = styled.div`
 	position: absolute;
 	bottom: 50px;
@@ -33,7 +14,7 @@ const Container = styled.div`
 
 	@media (max-width: 860px) {
 		height: 250px;
-		bottom: 50px;
+		bottom: 20px;
 	}
 `;
 
@@ -50,7 +31,6 @@ const Arrow = styled.svg`
 		cursor: pointer;
 		background-color: transparent;
 		color: ${colors.blue};
-		animation: ${bounce} 0.6s infinite;
 	}
 `;
 

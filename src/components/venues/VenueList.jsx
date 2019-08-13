@@ -5,6 +5,7 @@ import ErrorMessage from "../errors/ErrorMessage";
 import { colors } from "../../colors";
 import FloatingArrows from "./FloatingArrows";
 import Spinner from "../loaders/Spinner";
+import Typography from "@material-ui/core/Typography";
 
 const Container = styled.div`
 	text-align: left;
@@ -17,7 +18,7 @@ const Container = styled.div`
 		padding: 0;
 		li {
 			margin: 0;
-			padding: 5px;
+			padding: 0 5px;
 			list-style: none;
 
 			background-color: ${colors.lightGrey};
@@ -32,9 +33,14 @@ const Container = styled.div`
 				background-color: ${colors.blue};
 				color: white;
 			}
-			// &:after {
-			// 	content: " 🦄";
-			// }
+			&:after {
+				content: "";
+				display: block;
+				height: 1px;
+				border-bottom: 1px solid ${colors.blue};
+
+				width: 20%;
+			}
 		}
 	}
 `;
@@ -72,7 +78,7 @@ function VenueList({ venues, selectedVenue, setSelectedVenue }) {
 								className={selectedVenue === venue.id ? "selected" : ""}
 								onClick={() => setSelectedVenue(venue.id)}
 							>
-								<div>{venue.name}</div>
+								<Typography variant="h6">{venue.name}</Typography>
 								{selectedVenue === venue.id && <VenueDropdown venue={venue} />}
 							</li>
 						);

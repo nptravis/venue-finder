@@ -15,9 +15,10 @@ const Container = styled.div`
   background-color: ${colors.lightGrey};
   height: 100%;
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 
   header {
+    z-index: 10;
     position: fixed;
     display: flex;
     justify-content: space-between;
