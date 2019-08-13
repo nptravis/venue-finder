@@ -38,7 +38,6 @@ const Container = styled.div`
 				display: block;
 				height: 1px;
 				border-bottom: 1px solid ${colors.blue};
-
 				width: 20%;
 			}
 		}

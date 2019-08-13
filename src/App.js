@@ -62,6 +62,15 @@ const Container = styled.div`
     height: 20px;
     background-color: ${colors.blue};
     color: white;
+    line-height: 20px;
+    a {
+      text-decoration: none;
+      color: white;
+      vertical-align: middle;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 `;
 
@@ -179,7 +188,9 @@ function App(props) {
             />
           </FlexContainer>
         </main>
-        <footer>Nic Travis &copy; 2019</footer>
+        <footer>
+          <a href="https://nictravis.com">nictravis.com</a>
+        </footer>
       </Container>
     );
   }
